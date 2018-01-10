@@ -11,6 +11,6 @@ public class ClassEmpty : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+        this.transform.position = Vector3.zero;
 	}
 }
