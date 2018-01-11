@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ClassEmpty : MonoBehaviour {
+public class Parallax : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
@@ -11,6 +11,6 @@ public class ClassEmpty : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        this.transform.position = Vector3.zero;
+		
 	}
 }
