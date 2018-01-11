@@ -13,6 +13,6 @@ public class Parallax : MonoBehaviour {
 	
 	// Update is called once per frame
 	void LateUpdate () {
-        this.transform.Translate(Vector2.left * speed);
+        this.transform.Translate(Vector2.left * speed*Time.deltaTime);
 	}
 }
