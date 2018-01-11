@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class Parallax : MonoBehaviour {
 
+    [SerializeField]
+    float speed;
 	// Use this for initialization
 	void Start () {
 		
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		
+	void LateUpdate () {
+        this.transform.Translate(Vector2.left * speed);
 	}
 }
