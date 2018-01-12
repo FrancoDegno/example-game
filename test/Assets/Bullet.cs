@@ -15,12 +15,17 @@ public class Bullet : MonoBehaviour {
 
     void mov45S(float speed)
     {
-        this.transform.Translate(new Vector2(1 * speed, 1 * speed));
+
+        float ang = 10 * Mathf.PI / 180;
+       
+
+        this.transform.Translate(new Vector2(Mathf.Cos( ang)* speed, Mathf.Sin(ang) * speed));
     }
 
     void mov45I(float speed)
     {
-        this.transform.Translate(new Vector2(1 * speed, -1 * speed));
+        float ang = 10 * Mathf.PI / 180;
+        this.transform.Translate(new Vector2(Mathf.Cos(ang) * speed, -1 * speed* Mathf.Sin(ang)));
     }
 
 
