@@ -2,15 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyShip : MonoBehaviour {
+abstract public class EnemyShip : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+    [SerializeField]
+    float Hp;
+    [SerializeField]
+    protected float speed;
+
+    public abstract void MovShip(float speed);
+
+    public void reciveDamage(float dmg)
+    {
+        Hp -= dmg;
+        if (Hp <= 0) death();
+
+    }
+
+    void death()
+    {
+        Destroy(this);
+    }
+
+
+
+
 }
