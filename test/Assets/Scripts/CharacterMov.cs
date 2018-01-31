@@ -16,14 +16,27 @@ public class CharacterMov : MonoBehaviour {
 	[SerializeField]
 	Animator propAnimator;
 
-    float axisX, axisY;
+    float axisX, axisY,savedVelX;
 	// Use this for initialization
-
+	int stop=1;
 	
 	// Update is called once per frame
 	void Update () {
+		print (Time.timeScale);
         mov();       
+		if (stop == 0) {
+			if (Time.timeScale <= 3) {
+				Time.timeScale += Time.deltaTime * 0.1f;
+			}
+		} else 
+		{
+			if (Time.timeScale >= 3) {
+				Time.timeScale -= Time.deltaTime*0.2f;
+			
+		}
+		}
 	}
+
 
 
     void mov()
@@ -63,7 +76,7 @@ public class CharacterMov : MonoBehaviour {
 
 		if (axisX>0)
         {
-            this.transform.position += new Vector3(Time.deltaTime * velX, 0);
+			this.transform.position += new Vector3(Time.deltaTime *stop* velX, 0);
 
         }
 
@@ -81,6 +94,26 @@ public class CharacterMov : MonoBehaviour {
 
 
     }
+
+	void OnCollisionEnter2D(Collision2D other)
+	{
+		if (other.gameObject.layer == 12) {
+			stop = 0;
+			velY = velY / 2;
+
+		}
+	
+	}
+
+	void OnCollisionExit2D(Collision2D other)
+	{
+		if (other.gameObject.layer == 12) {
+			stop =1;
+			velY = velY*2;
+
+		}
+		
+	}
 
 
 }

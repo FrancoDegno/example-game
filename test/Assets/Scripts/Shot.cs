@@ -2,65 +2,52 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shot : MonoBehaviour {
+abstract public class Shot : MonoBehaviour {
     [SerializeField]
     GameObject Bullet;
 	[SerializeField]
 	Transform CannonPos;
 	[SerializeField]
-	Animator myAnimator;
+	float dmg;
+
+
+	[SerializeField]
+	protected Animator myAnimator;
 
     [SerializeField]
-    float delay;
-    bool shoot;
-    float lateTime;
+	protected float delay;
 
-	// Use this for initialization
-	void Start () {
+
+
+
+	public abstract void Shooting ();
+
+
+	protected void HommingShot()
+	{
 		
-	}
 	
-	// Update is called once per frame
-	void Update () {
-		if (Input.GetKey (KeyCode.Space) && shoot) {
-			shoot = false;
-			lateTime = Time.time;
+	}
 
-			myAnimator.SetBool ("charge", true);
-			TripleShot ();
-
-		} else
-
-			if(Input.GetKeyUp(KeyCode.Space))
-			myAnimator.SetBool ("charge", false);
-
-        if(Time.time>lateTime+delay)
-        {
-            shoot = true;
-            lateTime = Time.time;
-
-        }
-
-    }
-
-
-	void SingleShot()
+	protected void SingleShot(float ang)
 	{
 		GameObject auxBullet = (GameObject)Instantiate(Bullet, CannonPos.position, this.transform.rotation);
-		auxBullet.GetComponent<Bullet>().TypeBullet = 0;
-	
+		auxBullet.GetComponent<Bullet> ().BulletDmg = dmg;
+		auxBullet.GetComponent<Bullet> ().ang = ang;
 	}
 
-    void TripleShot()
+	protected void TripleShot(float ang1,float ang2,float ang3)
     {
-		GameObject auxBullet = (GameObject)Instantiate(Bullet, CannonPos.position, this.transform.rotation);
-        auxBullet.GetComponent<Bullet>().TypeBullet = 1;
+		float[] angles = new float[3]{ ang1, ang2, ang3 };
+		GameObject auxBullet;
+		for (int i = 0; i < 3; i++) {
+			auxBullet=(GameObject)Instantiate(Bullet, CannonPos.position, this.transform.rotation);
+			Bullet AUX = auxBullet.GetComponent<Bullet> ();
+			AUX.BulletDmg = dmg;
+			AUX.ang = angles [i];
+		}
 
-		auxBullet = (GameObject)Instantiate(Bullet, CannonPos.position, this.transform.rotation);
-        auxBullet.GetComponent<Bullet>().TypeBullet = 0;
-
-		auxBullet = (GameObject)Instantiate(Bullet, CannonPos.position, this.transform.rotation);
-        auxBullet.GetComponent<Bullet>().TypeBullet = 2;
+	
     }
 
 
